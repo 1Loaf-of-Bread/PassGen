@@ -5,7 +5,7 @@ import random
 
 parser = argparse.ArgumentParser(description='Generate a Password.')
 
-parser.add_argument('--length', '-l', action='store_true', help='Length of the password')
+parser.add_argument('--length', '-l', type=int, help='Length of the password')
 parser.add_argument('--specialchars', '-s', action='store_false', help='Exclude special chars in password.')
 parser.add_argument('--lowercase', '-lc', action='store_false', help='Exclude lowercase letters in password.')
 parser.add_argument('--uppercase', '-u', action='store_false', help='Exclude uppercase letters in password.')
@@ -40,13 +40,26 @@ if args.specialchars:
 
 if __name__ == "__main__":
     if args.length == False:
-        print("Since no length argument was stated, the default length was set to: 9")
-        args.length = 9
+        print("Since no length argument was stated, the default length was set to 12, and no filters were applied")
+        args.length = 12
+    else:
+        print(f"Password Length: {args.length}")
+        print()
+
+    if args.specialchars != True:
+        print("Applied Filter Out: Special Characters")
+
+    if args.integers != True:
+        print("Applied Filter Out: Integers")
+
+    if args.uppercase != True:
+        print("Applied Filter Out: Upper Case")
+
+    if args.lowercase != True:
+        print("Applied Filter Out: Lower Case")
         
     print()
     print("Generated Password: " + "".join(random.sample(passCharList, args.length)))
     print()
-
-    input("Press ENTER Key to Exit...")
 
     exit()
